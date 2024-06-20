@@ -2,7 +2,7 @@ const staticPage = "dev-user-site-v1"
 const assets = [
     "/",
     "/index.html",
-    "/style.css",
+    "/styles.css",
     "/script.js"
 ]
 self.addEventListener("install",(installEvent)=>{
