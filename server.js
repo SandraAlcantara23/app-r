@@ -22,6 +22,7 @@ const io = socketIo(server, {
 
 // Configurar pool de conexiones a MySQL
 const db = mysql.createPool({
+    connectionLimit: 20, // Asegúrate de que el límite del pool no exceda el límite del usuario
     host: 'bfbra5eeuib81qgrygqu-mysql.services.clever-cloud.com',
     user: 'ugbzbtyw6ij3qsyz',
     password: 'ajbM6OaXZB3EdiprMUWK',
@@ -42,14 +43,6 @@ db.on('connection', function (connection) {
 
 app.use(cors());
 
-// Middleware para compresión de respuestas HTTP
-app.use(compression());
-
-// Middleware para logging de solicitudes HTTP
-app.use(morgan('dev'));
-
-// Servir archivos estáticos desde la carpeta "public"
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware para parsear JSON
 app.use(express.json());
