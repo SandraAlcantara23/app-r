@@ -22,7 +22,7 @@ const io = socketIo(server, {
 
 // Configurar pool de conexiones a MySQL
 const db = mysql.createPool({
-    connectionLimit: 20, // Asegúrate de que el límite del pool no exceda el límite del usuario
+    
     host: 'bfbra5eeuib81qgrygqu-mysql.services.clever-cloud.com',
     user: 'ugbzbtyw6ij3qsyz',
     password: 'ajbM6OaXZB3EdiprMUWK',
