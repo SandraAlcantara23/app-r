@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url(../descarga\ \(2\).jpg);
+    background-repeat: repeat;
+    background-size:contain;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+   
+}
+#chat-container {
+    width: 100%;
+    max-width: 400px;
+    background-image: url(../descarga.jpg);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    box-sizing: border-box;
+}
+#chat-window {
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-image: url(../🐈🌌.jpg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    
+}
+#output {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    max-width: 70%;
+    position: relative;
+    display: inline-block;
+    word-wrap: break-word;
+  
+}
+.message.user {
+    background: #a8e6cf;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+.message.received {
+    background: #dcedc1;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+    
+}
+input[type="text"] {
+    width: calc(100% - 90px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #ffffff;
+    box-sizing: border-box;
+    
+}
+#username {
+    margin-bottom: 10px;
+}
+button {
+    width: 80px;
+    padding: 10px;
+    background: #ff5e57;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+button:hover {
+    background: #e14b47;
+    transform: translateY(-2px);
+}
+@media (max-width: 600px) {
+    #chat-container {
+        height: 100vh;
+        flex-direction: column;
+    }
+
