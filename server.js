@@ -57,7 +57,7 @@ app.use(express.json());
 // Ruta para el endpoint raíz
 app.get('/', (req, res) => {
     // Consulta para obtener usuarios
-    db.query('SELECT * FROM usuarios', (errorUsuarios, resultsUsuarios) => {
+    db.query('SELECT * FROM messages', (errorUsuarios, resultsUsuarios) => {
         if (errorUsuarios) {
             return res.status(500).json({ message: errorUsuarios.message || "No se pueden obtener datos de la tabla usuarios" });
         }
@@ -70,8 +70,8 @@ app.get('/', (req, res) => {
 
             // Enviar usuarios y mensajes como respuesta
             res.status(200).json({
-                usuarios: resultsUsuarios,
-                mensajes: resultsMessages
+                username: resultsUsuarios,
+                message: resultsMessages
             });
         });
     });
