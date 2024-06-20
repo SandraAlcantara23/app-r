@@ -41,12 +41,40 @@ db.on('connection', function (connection) {
 });
 
 app.use(cors());
+
+// Middleware para compresión de respuestas HTTP
+app.use(compression());
+
+// Middleware para logging de solicitudes HTTP
+app.use(morgan('dev'));
+
+// Servir archivos estáticos desde la carpeta "public"
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Middleware para parsear JSON
 app.use(express.json());
 
 // Ruta para el endpoint raíz
 app.get('/', (req, res) => {
-    res.send('Welcome to my API');
+    // Consulta para obtener usuarios
+    db.query('SELECT * FROM usuarios', (errorUsuarios, resultsUsuarios) => {
+        if (errorUsuarios) {
+            return res.status(500).json({ message: errorUsuarios.message || "No se pueden obtener datos de la tabla usuarios" });
+        }
+
+        // Consulta para obtener mensajes
+        db.query('SELECT * FROM messages', (errorMessages, resultsMessages) => {
+            if (errorMessages) {
+                return res.status(500).json({ message: errorMessages.message || "No se pueden obtener datos de la tabla messages" });
+            }
+
+            // Enviar usuarios y mensajes como respuesta
+            res.status(200).json({
+                usuarios: resultsUsuarios,
+                mensajes: resultsMessages
+            });
+        });
+    });
 });
 
 // Ruta para obtener datos de la tabla usuarios
@@ -93,14 +121,19 @@ io.on('connection', (socket) => {
             io.emit('newMessage', { id: result.insertId, username, message });
         });
     });
+
     socket.on('disconnect', () => {
         console.log('Usuario desconectado');
     });
 });
+
+// Middleware de manejo de errores
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Algo salió mal');
 });
+
+// Iniciar el servidor
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
